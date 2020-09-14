@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h5 class="modal-title">Details about: <%= pet["name"] %></h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" data-pet-id="<%= pet["pet_id"] %>">
+    <table>
+        <tbody>
+            <tr>
+                <td>Pet Type</td>
+                <td><%= pet["pet_type_name"] %></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><%= pet["description"] %></td>
+            </tr>
+                <tr>
+                    <td>Skills</td>
+                    <td>
+                    <% pet_skills = JSON.parse(pet["skills"]) if pet["skills"] 
+
+                        if pet_skills.present?
+                            pet_skills.each do |key, pet_skill| %>
+                                <span><%= pet_skill %></span>
+                    <%      end
+                        end
+                    %>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" id="adopt_pet_btn">Adopt <%= pet["name"] %></button>
+</div>
+
+<form id="remove_pet_form" action="/adopt_pet" data-is-processing="0">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <input type="hidden" name="pet_id" value="<%= pet["pet_id"] %>">
+</form>

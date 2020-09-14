@@ -1,0 +1,10 @@
+<tr data-pet-id="<%= pet["pet_id"] %>">
+            <td><%= pet["name"] %></td>
+            <td><%= pet["pet_type_name"] %></td>
+            <td>
+                <button class="show_pet_details_btn">Details</button>
+            </td>
+            <td>
+                <a href="/pets/<%= pet["pet_id"] %>/edit">Edit</a>
+            </td>
+        </tr>

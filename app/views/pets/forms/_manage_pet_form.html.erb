@@ -1,0 +1,38 @@
+<% is_edit_pet = (pet_id.present?) %>
+<form action="<%= is_edit_pet ? "/update_pet" : "/add_pet" %>" id="manage_pet_form" data-is-processing="0">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <!-- Edit -->
+    <%  if is_edit_pet %>
+        <input type="hidden" name="id" value="<%= pet_id %>">
+    <%  end %>
+    <div class="form-group">
+        <label for="">Pet Name</label>
+        <input class="form-control" type="text" name="name" value="<%= pet["name"] if is_edit_pet && pet["name"].present? %>">
+    </div>
+    <div class="form-group">
+        <label for="">Pet Type</label>
+        <select class="form-control" name="type" id="">
+            <option value="1" <%= is_edit_pet && pet['pet_type_name'] == 'Cat' ? "selected=selected" : "" %></option>Cat</option>
+            <option value="2" <%= is_edit_pet && pet['pet_type_name'] == 'Dog' ? "selected=selected" : "" %></option>Dog</option>
+            <option value="3" <%= is_edit_pet && pet['pet_type_name'] == 'Duck' ? "selected=selected" : "" %></option>Duck</option>
+            <option value="4" <%= is_edit_pet && pet['pet_type_name'] == 'Penguin' ? "selected=selected" : "" %></option>Penguin</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="">Description</label>
+        <textarea class="form-control" name="description" id=""><%= pet["description"] if is_edit_pet && pet["name"].present? %></textarea>
+    </div>
+    <div class="form-group" id="pet_skills_form_group">
+        <label for="">Skills</label>
+        <div id="pet_skills_input_container">
+            <% pet_skills = JSON.parse(pet["skills"]) if is_edit_pet && pet["skills"].present? %>
+            <input type="text" class="form-control" name="skills[0]" value="<%= pet_skills["0"] if is_edit_pet && pet_skills.present? && pet_skills["0"].present? %>">
+            <input type="text" class="form-control" name="skills[1]" value="<%= pet_skills["1"] if is_edit_pet && pet_skills.present? && pet_skills["1"].present? %>">
+            <input type="text" class="form-control" name="skills[2]" value="<%= pet_skills["2"] if is_edit_pet && pet_skills.present? && pet_skills["2"].present? %>">
+        </div>
+    </div>
+
+    <div class="btn_container">
+        <button type="submit" class="btn btn-danger"> <%= is_edit_pet ? 'Update' : 'Add' %> Pet</button>
+    </div>
+</form>

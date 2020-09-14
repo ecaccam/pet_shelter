@@ -1,0 +1,15 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+development: 
+  adapter: mysql2
+  encoding: utf8
+  database: pet_shelter
+  pool: 5
+  host: localhost # your local IP, also try localhost/127.0.0.1
+  port: 3306
+  username: root
+  password: 
